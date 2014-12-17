@@ -1,0 +1,57 @@
+﻿@model QuanLySIM.Entities.KhachHang
+
+@{
+    ViewBag.Title = "Khách Hàng - Tạo Mới";
+    Layout = "~/Areas/Admin/Views/Shared/_Admin.cshtml";
+}
+
+<link href="@Url.Content("~/Content/bs/admin/edit.css")" rel="stylesheet" media="screen"/>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+
+    <div class="form-edit">
+        @if (ViewBag.FailMsg != null) 
+        {
+            <p class="alert alert-danger">@ViewBag.FailMsg</p>
+        }
+
+        <p class="error-text">@Html.ValidationMessageFor(model => model.TenTK)</p>
+        <p class="error-text">@Html.ValidationMessageFor(model => model.MatKhau)</p>
+        <p class="error-text">@Html.ValidationMessageFor(model => model.Email)</p>
+        <p class="error-text">@Html.ValidationMessageFor(model => model.TenKH)</p>
+        <p class="error-text">@Html.ValidationMessageFor(model => model.CMND)</p>
+        <p class="error-text">@Html.ValidationMessageFor(model => model.DiaChi)</p>
+        <p class="error-text">@Html.ValidationMessageFor(model => model.SDT)</p>
+        <p class="error-text">@Html.ValidationMessageFor(model => model.MaNV)</p>
+
+        @Html.LabelFor(model => model.TenTK)
+        @Html.TextBox("TenTK", null, new { @class = "form-control", placeholder = "Tên tài khoản" })
+
+        @Html.LabelFor(model => model.MatKhau)
+        @Html.Password("MatKhau", null, new { @class = "form-control", placeholder = "Mật khẩu" })
+
+        @Html.LabelFor(model => model.Email)
+        @Html.TextBox("Email", null, new { @class = "form-control", placeholder = "Email" })
+
+        @Html.LabelFor(model => model.TenKH)
+        @Html.TextBox("TenKH", null, new { @class = "form-control", placeholder = "Tên đầy đủ" })
+
+        @Html.LabelFor(model => model.CMND)
+        @Html.TextBox("CMND", null, new { @class = "form-control", placeholder = "Số CMND" })
+
+        @Html.LabelFor(model => model.DiaChi)
+        @Html.TextBox("DiaChi", null, new { @class = "form-control", placeholder = "Địa chỉ đầy đủ" })
+
+        @Html.LabelFor(model => model.SDT)
+        @Html.TextBox("SDT", null, new { @class = "form-control", placeholder = "SĐT liên hệ" })
+
+        @Html.LabelFor(model => model.MaNV, "Nhân Viên Quản Lý")
+        @Html.DropDownList("MaNV", null, new { @class = "form-control" });
+
+        <p><input type="submit" class="btn btn-lg btn-primary btn-block" value="Thêm" /></p>
+    </div>
+}

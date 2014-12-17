@@ -1,0 +1,29 @@
+﻿@model QuanLySIM.Entities.SIM
+
+@{
+    ViewBag.Title = "SIM - Chi Tiết";
+    Layout = "~/Areas/Admin/Views/Shared/_Admin.cshtml";
+}
+
+<div class="panel panel-info">
+  <div class="panel-heading">
+    <h3 class="panel-title"><span class="glyphicon glyphicon-list"></span> THÔNG TIN SIM</h3>
+  </div>  
+    <div class="panel-body">
+        <ul class="list-group">
+            <li class="list-group-item">@(Html.LabelFor(model => model.MaSIM)): @Html.DisplayFor(model => model.MaSIM)</li>
+            <li class="list-group-item">@(Html.LabelFor(model => model.SoThueBao)): @Html.DisplayFor(model => model.SoThueBao)</li>
+            <li class="list-group-item">@(Html.LabelFor(model => model.GiaTien)): @Html.DisplayFor(model => model.GiaTien)</li>
+            <li class="list-group-item">@(Html.LabelFor(model => model.TinhTrang)): @Html.DisplayFor(model => model.TinhTrang)</li>
+        </ul>
+        @using (Html.BeginForm("Delete", "SIM", new { id = Model.SimId }))
+        {
+            @Html.AntiForgeryToken()            
+            
+            <p>
+                @Html.ActionLink("Cập Nhật", "Edit", new { id = Model.SimId }, new { @class = "btn btn-primary btn-lg" })
+                <input type="submit" onclick="return confirm('Bạn có chắc muốn xóa bản ghi này?')" class="btn btn-lg btn-danger" value="Xóa" />                
+            </p>
+        } 
+    </div>
+</div>

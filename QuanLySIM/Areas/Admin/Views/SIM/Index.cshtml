@@ -1,0 +1,74 @@
+﻿@model IEnumerable<QuanLySIM.Entities.SIM>
+
+@{
+    ViewBag.Title = "Quản Lý Thông Tin SIM";
+    Layout = "~/Areas/Admin/Views/Shared/_Admin.cshtml";
+    String BaseUrl = Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd('/') + "/";
+}
+
+<script type="text/javascript">        
+    setInterval(function () {
+
+        $('div#content').load('@(BaseUrl)' + '/Admin/SIM div#content div.panel');
+
+    }, 50);
+</script>
+
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <h3 class="panel-title"><span class="glyphicon glyphicon-folder-open"></span>&nbsp; QUẢN LÝ SIM</h3>
+    </div>
+    <div class="panel-body">
+
+        <table class="table table-hover">
+            <tr>
+                <th>
+                    Mã Số SIM
+                </th>
+                <th>
+                    Số Thuê Bao
+                </th>
+                <th>
+                    Giá Tiền
+                </th>
+                <th>
+                    Tình Trạng
+                </th>
+                <th></th>
+                <th></th>
+            </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaSIM)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SoThueBao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GiaTien)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TinhTrang)
+                </td>
+                <td>
+                    @Html.ActionLink("Sửa", "Edit", new { id = item.SimId }) |
+                    @Html.ActionLink("Chi Tiết", "Details", new { id = item.SimId })
+                </td>
+                <td>                    
+                    @using (Html.BeginForm("Delete", "SIM", new { id = item.SimId }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="submit" onclick="return confirm('Bạn có chắc muốn xóa bản ghi này?')" class="btn btn-danger" value="Xóa" />
+                    }
+                </td>
+            </tr>
+        }
+
+        </table>
+
+    </div>
+    <div class="panel-footer">Tổng <span class="badge">@Model.Count()</span></div>
+</div>

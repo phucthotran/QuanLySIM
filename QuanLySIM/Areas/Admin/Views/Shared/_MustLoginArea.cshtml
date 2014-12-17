@@ -1,0 +1,7 @@
+﻿@{
+    ViewBag.Title = "Không Thể Truy Cập Nội Dung";
+    Layout = "~/Areas/Admin/Views/Shared/_Admin.cshtml";
+}
+
+<p class="alert alert-warning">Bạn phải @Html.ActionLink("Đăng Nhập", "Login", "Default", new { @ref = Request.Url.AbsoluteUri }, null) để thực hiện thao tác này</p>
+

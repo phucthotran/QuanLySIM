@@ -1,0 +1,32 @@
+.form-register {
+  padding: 15px;
+  margin: 0 auto;
+}
+.form-register .form-control {
+  position: relative;
+  font-size: 16px;
+  height: auto;
+  padding: 10px;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.form-register .form-control:focus {
+  z-index: 2;
+}
+.form-register input[name="TenTK"] {
+  margin-bottom: -1px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.form-register input[name="MatKhau"] {
+  margin-bottom: -1px;
+  border-radius: 0;
+}
+
+.form-register input[name="Email"] 
+{
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}

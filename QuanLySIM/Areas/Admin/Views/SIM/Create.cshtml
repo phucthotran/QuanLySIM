@@ -1,0 +1,38 @@
+﻿@model QuanLySIM.Entities.SIM
+
+@{
+    ViewBag.Title = "SIM - Thêm Mới";
+    Layout = "~/Areas/Admin/Views/Shared/_Admin.cshtml";
+}
+
+<link href="@Url.Content("~/Content/bs/admin/edit.css")" rel="stylesheet" media="screen"/>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-edit">
+        @if (ViewBag.FailMsg != null)
+        {
+            <p class="alert alert-danger">@ViewBag.FailMsg</p>
+        }
+
+        <p class="error-text">@Html.ValidationMessageFor(model => model.MaSIM)</p>
+        <p class="error-text">@Html.ValidationMessageFor(model => model.SoThueBao)</p>
+        <p class="error-text">@Html.ValidationMessageFor(model => model.GiaTien)</p>
+
+        @Html.LabelFor(model => model.MaSIM)
+        @Html.TextBox("MaSIM", null, new { @class = "form-control", placeholder = "Mã serial của SIM" })
+
+        @Html.LabelFor(model => model.SoThueBao)
+        @Html.TextBox("SoThueBao", null, new { @class = "form-control", placeholder = "Số thuê bao" })
+
+        @Html.LabelFor(model => model.GiaTien)
+        @Html.TextBox("GiaTien", null, new { @class = "form-control", placeholder = "Giá tiền" })
+        
+        <p><input type="submit" class="btn btn-lg btn-primary btn-block" value="Thêm" /></p>
+    </div>
+}

@@ -1,0 +1,36 @@
+﻿@model QuanLySIM.Entities.SIM
+@using QuanLySIM.Entities
+
+@{
+    ViewBag.Title = "Quản Lý SIM - Chi Tiết SIM";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="panel panel-info">
+  <div class="panel-heading">
+    <h3 class="panel-title"><span class="glyphicon glyphicon-credit-card"></span> THÔNG TIN SIM</h3>
+  </div>  
+    <div class="panel-body">
+        <ul class="list-group">
+            <li class="list-group-item">@(Html.LabelFor(model => model.SoThueBao)): @Html.DisplayFor(model => model.SoThueBao)</li>
+            <li class="list-group-item">@(Html.LabelFor(model => model.GiaTien)): @Html.DisplayFor(model => model.GiaTien)</li>            
+        </ul>
+        
+        @if (Model.TinhTrang == SIM.SOLD)
+        {
+            <p class="alert alert-danger">SIM NÀY ĐÃ BÁN</p>
+        }
+        else if(Model.TinhTrang == SIM.NOT_PAID)
+        {
+            <p class="alert alert-warning">SIM NÀY ĐÃ ĐƯỢC ĐẶT HÀNG</p>
+        }
+        else if (ViewBag.IsOrderReachLimit)
+        {
+            <p class="alert alert-danger">BẠN KHÔNG THỂ MUA THÊM SIM KHI CHƯA HOÀN THÀNH THANH TOÁN CHO 2 ĐƠN HÀNG TRƯỚC ĐÓ</p>
+        }
+        else
+        {
+            <p>@Html.ActionLink("Đặt Mua", "Order", new { id = Model.SimId }, new { @class = "btn btn-primary btn-lg" })</p>
+        }        
+    </div>
+</div>

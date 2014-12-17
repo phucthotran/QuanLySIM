@@ -1,0 +1,176 @@
+﻿@using QuanLySIM.Entities;
+@using QuanLySIM.Services;
+@using QuanLySIM.Data.EntityRepositories;
+@using QuanLySIM.Data.DbInteractions;
+
+@{
+    bool IsLogin = (Request.Cookies["user_login_id"] != null && Request.Cookies["user_login_id"].Value != null) && (Request.Cookies["user_role"] != null && Request.Cookies["user_role"].Value != null);            
+    bool IsAdmin = Request.Cookies["user_role"] != null && Request.Cookies["user_role"].Value == "Admin";
+    bool IsStaff = Request.Cookies["user_role"] != null && Request.Cookies["user_role"].Value == "Staff";
+    
+    //bool IsLogin = Session["user_login_id"] != null;
+    //bool IsNotLogin = Session["user_login_id"] == null;
+    //bool IsAdmin = Session["user_role"] != null && Session["user_role"].ToString() == "Admin";
+    //bool IsStaff = Session["user_role"] != null && Session["user_role"].ToString() == "Staff";
+    String UrlPath = Request.Url.AbsoluteUri;
+    String BaseUrl = Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd('/') + "/";
+
+    IDbFactory dbFactory = new DbFactory();
+    ICustomerRepository customer = new CustomerRepository(dbFactory);
+    IStaffRepository staff = new StaffRepository(dbFactory);
+    IGroupRepository group = new GroupRepository(dbFactory);
+    IOrderRepository order = new OrderRepository(dbFactory);
+    ISimRepository sim = new SimRepository(dbFactory);
+
+    IDbService db = new DbService(customer, null, group, sim, order, staff);
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <link rel="Shortcut Icon" href="@Url.Content("~/Content/favicon-admin.ico")" />
+
+    <!-- Bootstrap -->
+    <link href="@Url.Content("~/Content/bs/bootstrap.css")" rel="stylesheet" media="screen"/>
+
+    <link href="@Url.Content("~/Content/bs/custom.css")" rel="stylesheet" media="screen"/>
+
+    <script src="@Url.Content("~/Scripts/jquery-2.0.3.min.js")" type="text/javascript"></script>    
+    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.10.3.min.js")" type="text/javascript"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="@Url.Content("~/Scripts/html5shiv.js")" type="text/javascript"></script>
+      <script src="@Url.Content("~/Scripts/respond.min.js")" type="text/javascript"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <div id="wrap">
+        <!-- Static navbar -->
+        <div class="navbar navbar-inverse navbar-static-top">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/Admin">Administrator</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+            <li @if (UrlPath == (BaseUrl + "Admin")) { Write("class = active"); }>@Html.ActionLink("Trang Chủ", "Index", "Default")</li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Khác <b class="caret"></b></a>
+                <ul class="dropdown-menu">                    
+                    @if (IsLogin)
+                    {
+                        <li @if (UrlPath == (BaseUrl + "Admin/Default/Logout")) { Write("class = active"); }>@Html.ActionLink("Thoát", "Logout", "Default")</li>
+                    }
+                    else
+                    {
+                        <li @if (UrlPath == (BaseUrl + "Admin/Default/Login")) { Write("class = active"); }>@Html.ActionLink("Đăng Nhập", "Login", "Default")</li>
+                    }
+                </ul>
+            </li>
+            </ul>
+        </div><!--/.nav-collapse -->
+        </div>
+
+        <div class="row-fluid">
+            @if (IsLogin)
+            {
+                <div id="sidebar" class="col-md-2">
+
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><span class="glyphicon glyphicon-credit-card"></span> SIM</h3>
+                        </div>
+                        <div class="panel-body">
+                            Quản Lý SIM
+                        </div>
+                        <ul class="list-group">
+                            <li class="list-group-item"><span class="glyphicon glyphicon-list-alt"></span> @Html.ActionLink("Danh Sách", "Index", "SIM") <span class="badge pull-right">@(db.SIM.Count)</span></li>
+                            <li class="list-group-item"><span class="glyphicon glyphicon-pencil"></span> @Html.ActionLink("Thêm Mới", "Create", "SIM")</li>
+                        </ul>
+                    </div>
+
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><span class="glyphicon glyphicon-shopping-cart"></span> Phiếu Mua</h3>
+                        </div>
+                        <div class="panel-body">
+                            Quản Lý Phiếu Mua Hàng
+                        </div>
+                        <ul class="list-group">
+                            <li class="list-group-item"><span class="glyphicon glyphicon-list-alt"></span> @Html.ActionLink("Danh Sách", "Index", "Order") <span class="badge pull-right">@(db.Order.Count)</span></li>
+                            <li class="list-group-item"><span class="glyphicon glyphicon-pencil"></span> @Html.ActionLink("Thêm Mới", "Create", "Order")</li>
+                        </ul>
+                    </div>
+
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><span class="glyphicon glyphicon-th-list"></span> Khách Hàng</h3>
+                        </div>
+                        <div class="panel-body">
+                            Quản Lý Khách Hàng
+                        </div>
+                        <ul class="list-group">
+                            <li class="list-group-item"><span class="glyphicon glyphicon-list-alt"></span> @Html.ActionLink("Danh Sách", "Index", "Customer") <span class="badge pull-right">@(db.Customer.Count)</span></li>
+                            <li class="list-group-item"><span class="glyphicon glyphicon-pencil"></span> @Html.ActionLink("Thêm Mới", "Create", "Customer")</li>
+                        </ul>
+                    </div>
+
+                    @if (IsAdmin)
+                    {
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><span class="glyphicon glyphicon-user"></span> Nhân Viên</h3>
+                            </div>
+                            <div class="panel-body">
+                                Quản Lý Nhân Viên
+                            </div>
+                            <ul class="list-group">
+                                <li class="list-group-item"><span class="glyphicon glyphicon-list-alt"></span> @Html.ActionLink("Danh Sách", "Index", "Staff") <span class="badge pull-right">@(db.Staff.Count)</span></li>
+                                <li class="list-group-item"><span class="glyphicon glyphicon-pencil"></span> @Html.ActionLink("Thêm Mới", "Create", "Staff")</li>
+                            </ul>
+                        </div>
+
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><span class="glyphicon glyphicon-th-large"></span> Nhóm</h3>
+                            </div>
+                            <div class="panel-body">
+                                Quản Lý Nhóm
+                            </div>
+                            <ul class="list-group">
+                                <li class="list-group-item"><span class="glyphicon glyphicon-list-alt"></span> @Html.ActionLink("Danh Sách", "Index", "Group") <span class="badge pull-right">@(db.Group.Count)</span></li>
+                                <li class="list-group-item"><span class="glyphicon glyphicon-pencil"></span> @Html.ActionLink("Thêm Mới", "Create", "Group")</li>
+                            </ul>
+                        </div>
+                    }
+
+                </div>
+                
+                <div id="content" class="col-md-10">
+                    @RenderBody()
+                </div> 
+            }
+            else
+            {            
+                <div id="content" class="col-md-12">
+                    @RenderBody()
+                </div>
+            }
+        </div>
+
+    </div>
+       
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="@Url.Content("~/Scripts/bootstrap.min.js")" type="text/jscript"></script>
+</body>
+</html>

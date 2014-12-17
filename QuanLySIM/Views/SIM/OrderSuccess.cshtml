@@ -1,0 +1,6 @@
+﻿@{
+    ViewBag.Title = "Quản Lý SIM - Đặt Hàng Thành Công";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<p class="alert alert-success">Đặt hàng thành công. Vui lòng đến cửa hàng để tiến hành thanh toán trước ngày <span class="label label-info">@DateTime.Now.AddDays(4).ToString("dd/MM/yyyy")</span></p>

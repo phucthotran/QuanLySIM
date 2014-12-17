@@ -1,0 +1,60 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuanLySIM", "QuanLySIM\QuanLySIM.csproj", "{FE512D45-34BA-40CA-9B1D-1865EBD536E0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FA1C84DC-2C56-42B9-9F23-D4C2C431A1FF}"
+	ProjectSection(SolutionItems) = preProject
+		Local.testsettings = Local.testsettings
+		QuanLySIM.vsmdi = QuanLySIM.vsmdi
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuanLySIM.Tests", "QuanLySIM.Tests\QuanLySIM.Tests.csproj", "{1C605B80-270A-41F2-A114-F5ECDA953B6D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuanLySIM.Entities", "QuanLySIM.Entities\QuanLySIM.Entities.csproj", "{0E0C664F-04B5-4566-9A29-EBA4F2DD77D0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuanLySIM.Data", "QuanLySIM.Data\QuanLySIM.Data.csproj", "{2DB2B3A4-D192-4409-96EE-1F37C17B6D1D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuanLySIM.Services", "QuanLySIM.Services\QuanLySIM.Services.csproj", "{DC422B54-7748-4BD4-98D1-F9E4730F5A26}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuanLySIM.Lib", "QuanLySIM.Lib\QuanLySIM.Lib.csproj", "{C9ABFC86-8BFB-48BC-886D-1C88722C41B2}"
+EndProject
+Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = QuanLySIM.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FE512D45-34BA-40CA-9B1D-1865EBD536E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE512D45-34BA-40CA-9B1D-1865EBD536E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE512D45-34BA-40CA-9B1D-1865EBD536E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE512D45-34BA-40CA-9B1D-1865EBD536E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C605B80-270A-41F2-A114-F5ECDA953B6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C605B80-270A-41F2-A114-F5ECDA953B6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C605B80-270A-41F2-A114-F5ECDA953B6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C605B80-270A-41F2-A114-F5ECDA953B6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E0C664F-04B5-4566-9A29-EBA4F2DD77D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E0C664F-04B5-4566-9A29-EBA4F2DD77D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E0C664F-04B5-4566-9A29-EBA4F2DD77D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E0C664F-04B5-4566-9A29-EBA4F2DD77D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DB2B3A4-D192-4409-96EE-1F37C17B6D1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DB2B3A4-D192-4409-96EE-1F37C17B6D1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DB2B3A4-D192-4409-96EE-1F37C17B6D1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DB2B3A4-D192-4409-96EE-1F37C17B6D1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC422B54-7748-4BD4-98D1-F9E4730F5A26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC422B54-7748-4BD4-98D1-F9E4730F5A26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC422B54-7748-4BD4-98D1-F9E4730F5A26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC422B54-7748-4BD4-98D1-F9E4730F5A26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9ABFC86-8BFB-48BC-886D-1C88722C41B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9ABFC86-8BFB-48BC-886D-1C88722C41B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9ABFC86-8BFB-48BC-886D-1C88722C41B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9ABFC86-8BFB-48BC-886D-1C88722C41B2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,78 @@
+﻿@model QuanLySIM.Entities.Nhom
+
+@{
+    ViewBag.Title = "Nhóm - Chi Tiết";
+    Layout = "~/Areas/Admin/Views/Shared/_Admin.cshtml";
+}
+
+<div class="panel panel-info">
+  <div class="panel-heading">
+    <h3 class="panel-title"><span class="glyphicon glyphicon-list"></span> THÔNG TIN NHÓM</h3>
+  </div>  
+    <div class="panel-body">
+        <ul class="list-group">
+            <li class="list-group-item">@(Html.LabelFor(model => model.Ten)): @Html.DisplayFor(model => model.Ten)</li>
+            <li class="list-group-item">@(Html.LabelFor(model => model.MoTa)): @Html.DisplayFor(model => model.MoTa)</li>
+            <li class="list-group-item">@(Html.LabelFor(model => model.Role.Name)): @Html.DisplayFor(model => model.Role.Name)</li>
+        </ul>
+        @using (Html.BeginForm("Delete", "Group", new { id = Model.MaNhom }))
+        {
+            @Html.AntiForgeryToken()
+            
+            <p>
+                @Html.ActionLink("Cập Nhật", "Edit", new { id = Model.MaNhom }, new { @class = "btn btn-primary btn-lg" })
+                <input type="submit" onclick="return confirm('Bạn có chắc muốn xóa bản ghi này?')" class="btn btn-lg btn-danger" value="Xóa" />                
+            </p>
+        } 
+    </div>
+</div>
+
+<div class="panel panel-success">
+  <div class="panel-heading">
+    <h3 class="panel-title"><span class="glyphicon glyphicon-list"></span> NHÂN VIÊN TRONG NHÓM</h3>
+  </div>  
+    <div class="panel-body">
+        <table class="table table-hover">
+            <tr>
+                <th>
+                    Tài Khoản
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Tên
+                </th>
+                <th></th>
+                <th></th>
+            </tr>
+
+        @foreach (var item in Model.NhanVien)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenTK)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenNV)
+                </td>
+                <td>
+                    @Html.ActionLink("Sửa", "Edit", "Staff", new { id = item.MaNV }, null) |
+                    @Html.ActionLink("Chi Tiết", "Details", "Staff", new { id = item.MaNV }, null)
+                </td>
+                <td>
+                    @using (Html.BeginForm("Delete", "Staff", new { id = item.MaNV }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="submit" onclick="return confirm('Bạn có chắc muốn xóa bản ghi này?')" class="btn btn-danger" value="Xóa" />
+                    }
+                </td>
+            </tr>
+        }
+
+        </table>
+    </div>
+</div>

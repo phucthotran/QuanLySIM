@@ -1,0 +1,38 @@
+﻿@model QuanLySIM.Entities.Nhom
+
+@{
+    ViewBag.Title = "Nhóm - Thêm Mới";
+    Layout = "~/Areas/Admin/Views/Shared/_Admin.cshtml";
+}
+
+<link href="@Url.Content("~/Content/bs/admin/edit.css")" rel="stylesheet" media="screen"/>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-edit">
+        @if (ViewBag.FailMsg != null)
+        {
+            <p class="alert alert-danger">@ViewBag.FailMsg</p>
+        }
+
+        <p class="error-text">@Html.ValidationMessageFor(model => model.Ten)</p>
+        <p class="error-text">@Html.ValidationMessageFor(model => model.MoTa)</p>
+        <p class="error-text">@Html.ValidationMessageFor(model => model.RoleId)</p>
+
+        @Html.LabelFor(model => model.Ten)
+        @Html.TextBox("Ten", null, new { @class = "form-control", placeholder = "Tên nhóm" })
+
+        @Html.LabelFor(model => model.MoTa)
+        @Html.TextBox("MoTa", null, new { @class = "form-control", placeholder = "Mô tả" })
+
+        @Html.LabelFor(model => model.RoleId, "Vai Trò")
+        @Html.DropDownList("RoleId", null, new { @class = "form-control" })
+
+        <p><input type="submit" class="btn btn-lg btn-primary btn-block" value="Thêm" /></p>
+    </div>
+}

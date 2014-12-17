@@ -1,0 +1,7 @@
+﻿@{
+    ViewBag.Title = "Không Thể Truy Cập Nội Dung";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<p class="alert alert-warning">Bạn phải @Html.ActionLink("Đăng Nhập", "Login", "Customer", new { @ref = Request.Url.AbsoluteUri }, null) để thực hiện thao tác này</p>
+

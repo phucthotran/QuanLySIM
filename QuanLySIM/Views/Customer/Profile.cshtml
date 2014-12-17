@@ -1,0 +1,117 @@
+﻿@model QuanLySIM.Entities.KhachHang
+
+@{
+    ViewBag.Title = "Quản Lý SIM - Thông Tin Cá Nhân";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="@Url.Content("~/Content/bs/profile.css")" rel="stylesheet" media="screen"/>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+
+    <div class="form-profile">
+        @Html.HiddenFor(model => model.TenTK)
+        @Html.HiddenFor(model => model.MatKhau)
+
+        @if (ViewBag.IsProfileNotCompleted != null && ViewBag.IsProfileNotCompleted)
+        {
+            <p class="alert alert-warning">Vui lòng cập nhật @Html.ActionLink("Thông Tin Cá Nhân", "Profile") của bạn để hỗ trợ giao dịch được thuận tiện và chính xác</p>
+        }
+
+        @if (ViewBag.FailMsg != null) 
+        {
+            <p class="alert alert-danger">@ViewBag.FailMsg</p>
+        }
+        
+        @if (ViewBag.SuccessMsg != null) 
+        {
+            <p class="alert alert-success">@ViewBag.SuccessMsg</p>
+        }
+        
+        <p class="error-text">@Html.ValidationMessageFor(model => model.Email)</p>
+        <p class="error-text">@Html.ValidationMessageFor(model => model.TenKH)</p>
+        <p class="error-text">@Html.ValidationMessageFor(model => model.CMND)</p>
+        <p class="error-text">@Html.ValidationMessageFor(model => model.DiaChi)</p>
+        <p class="error-text">@Html.ValidationMessageFor(model => model.SDT)</p>
+
+        <p><span class="label label-info">@(Html.DisplayFor(model => model.TenTK))</span></p>
+
+        @Html.LabelFor(model => model.Email)
+        @Html.TextBox("Email", Model.Email, new { @class = "form-control", placeholder = "Email" })
+
+        @Html.LabelFor(model => model.TenKH)
+        @Html.TextBox("TenKH", Model.TenKH, new { @class = "form-control", placeholder = "Tên đầy đủ" })
+
+        @Html.LabelFor(model => model.CMND)
+        @Html.TextBox("CMND", Model.CMND, new { @class = "form-control", placeholder = "Số CMND" })
+
+        @Html.LabelFor(model => model.DiaChi)
+        @Html.TextBox("DiaChi", Model.DiaChi, new { @class = "form-control", placeholder = "Địa chỉ đầy đủ" })
+
+        @Html.LabelFor(model => model.SDT)
+        @Html.TextBox("SDT", Model.SDT, new { @class = "form-control", placeholder = "SĐT liên hệ" })
+
+        <p><input type="submit" class="btn btn-lg btn-primary btn-block" value="Cập Nhật" /></p>
+    </div>
+    
+    @*<fieldset>
+        <legend>Chi Tiết Thông Tin Cá Nhân</legend>
+
+        @Html.HiddenFor(model => model.MaKH)
+
+        <div class="display-label">
+            @Html.LabelFor(model => model.KhachHang.TenTK)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.KhachHang.TenTK)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.KhachHang.Email)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.KhachHang.Email)
+            @Html.ValidationMessageFor(model => model.KhachHang.Email)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TenKH)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TenKH)
+            @Html.ValidationMessageFor(model => model.TenKH)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CMND)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CMND)
+            @Html.ValidationMessageFor(model => model.CMND)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DiaChi)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DiaChi)
+            @Html.ValidationMessageFor(model => model.DiaChi)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SDT)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SDT)
+            @Html.ValidationMessageFor(model => model.SDT)
+        </div>
+
+        <p>
+            <input type="submit" value="Cập Nhật" />
+        </p>
+    </fieldset>*@
+}

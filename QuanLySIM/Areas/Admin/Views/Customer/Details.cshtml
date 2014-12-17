@@ -1,0 +1,106 @@
+﻿@model QuanLySIM.Entities.KhachHang
+
+@{
+    ViewBag.Title = "Khách Hàng - Chi Tiết";
+    Layout = "~/Areas/Admin/Views/Shared/_Admin.cshtml";
+}
+
+<div class="panel panel-info">
+  <div class="panel-heading">
+    <h3 class="panel-title"><span class="glyphicon glyphicon-list"></span> THÔNG TIN KHÁCH HÀNG</h3>
+  </div>  
+    <div class="panel-body">
+        <ul class="list-group">
+            <li class="list-group-item">@(Html.LabelFor(model => model.TenTK)): @Html.DisplayFor(model => model.TenTK)</li>
+            <li class="list-group-item">@(Html.LabelFor(model => model.Email)): @Html.DisplayFor(model => model.Email)</li>
+            <li class="list-group-item">@(Html.LabelFor(model => model.TenKH)): @Html.DisplayFor(model => model.TenKH)</li>
+            <li class="list-group-item">@(Html.LabelFor(model => model.CMND)): @Html.DisplayFor(model => model.CMND)</li>
+            <li class="list-group-item">@(Html.LabelFor(model => model.DiaChi)): @Html.DisplayFor(model => model.DiaChi)</li>
+            <li class="list-group-item">@(Html.LabelFor(model => model.SDT)): @Html.DisplayFor(model => model.SDT)</li>
+            <li class="list-group-item">@(Html.LabelFor(model => model.SoLuongDaMua)): @Html.DisplayFor(model => model.SoLuongDaMua)</li>
+            <li class="list-group-item">@(Html.LabelFor(model => model.SoLuongDangDatMua)): @Html.DisplayFor(model => model.SoLuongDangDatMua)</li>
+            <li class="list-group-item">
+                <b>Nhân Viên Quản Lý</b>: @Html.DisplayFor(model => model.NhanVien.TenNV)&nbsp;&nbsp;&nbsp;
+                <span class="glyphicon glyphicon-link"></span>
+                @Html.ActionLink("Xem thông tin Nhân Viên", "Details", "Staff", new { id = Model.NhanVien.MaNV }, null)
+            </li>
+        </ul>
+        @using (Html.BeginForm("Delete", "Customer", new { id = Model.MaKH }))
+        {
+            @Html.AntiForgeryToken()            
+            
+            <p>
+                @Html.ActionLink("Cập Nhật", "Edit", new { id = Model.MaKH }, new { @class = "btn btn-primary btn-lg" })
+                <input type="submit" onclick="return confirm('Bạn có chắc muốn xóa bản ghi này?')" class="btn btn-lg btn-danger" value="Xóa" />                
+            </p>
+        }        
+    </div>
+</div>
+
+<div class="panel panel-success">
+  <div class="panel-heading">
+    <h3 class="panel-title"><span class="glyphicon glyphicon-list"></span> ĐƠN ĐẶT HÀNG</h3>
+  </div>  
+    <div class="panel-body">
+        <table class="table table-hover">
+            <tr>
+                <th>
+                    Mã Số SIM
+                </th>
+                <th>
+                    Số Thuê Bao
+                </th>
+                <th>
+                    Ngày Đặt Mua
+                </th>
+                <th>
+                    Ngày Giao
+                </th>
+                <th>
+                    Tổng Tiền
+                </th>
+                <th>
+                    Tình Trạng
+                </th>
+                <th></th>
+                <th></th>
+            </tr>
+
+        @foreach (var item in Model.PhieuMua)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SIM.MaSIM)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SIM.SoThueBao)
+                </td>
+                <td>
+                    @(item.NgayDatMua.ToShortDateString())            
+                </td>
+                <td>
+                    @(item.NgayGiao.ToShortDateString())
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TongTien)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SIM.TinhTrang)
+                </td>
+                <td>
+                    @Html.ActionLink("Sửa", "Edit", "Order", new { id = item.MaPM }, null) |
+                    @Html.ActionLink("Chi Tiết", "Details", "Order", new { id = item.MaPM }, null)
+                </td>
+                <td>
+                    @using (Html.BeginForm("Delete", "Order", new { id = item.MaPM }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="submit" onclick="return confirm('Bạn có chắc muốn xóa bản ghi này?')" class="btn btn-danger" value="Xóa" />
+                    }
+                </td>
+            </tr>
+        }
+
+        </table>             
+    </div>
+</div>

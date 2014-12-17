@@ -1,0 +1,88 @@
+﻿@model IEnumerable<QuanLySIM.Entities.PhieuMua>
+
+@{
+    ViewBag.Title = "Quản Lý Phiếu Mua";
+    Layout = "~/Areas/Admin/Views/Shared/_Admin.cshtml";
+    String BaseUrl = Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd('/') + "/";
+}
+
+<script type="text/javascript">
+    setInterval(function () {
+
+        $('div#content').load('@(BaseUrl)' + '/Admin/Order div#content div.panel');
+
+    }, 50);
+</script>
+
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <h3 class="panel-title"><span class="glyphicon glyphicon-folder-open"></span>&nbsp; QUẢN LÝ PHIẾU MUA</h3>
+    </div>
+    <div class="panel-body">
+
+        <table class="table table-hover">
+            <tr>
+                <th>
+                    Mã Số SIM
+                </th>
+                <th>
+                    Số Thuê Bao
+                </th>
+                <th>
+                    Ngày Đặt Mua
+                </th>
+                <th>
+                    Ngày Giao
+                </th>
+                <th>
+                    Tổng Tiền
+                </th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SIM.MaSIM)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SIM.SoThueBao)
+                </td>
+                <td>
+                    @(item.NgayDatMua.ToShortDateString())            
+                </td>
+                <td>
+                    @(item.NgayGiao.ToShortDateString())
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TongTien)
+                </td>
+                <td>
+                    @Html.ActionLink("Sửa", "Edit", new { id = item.MaPM }) |
+                    @Html.ActionLink("Chi Tiết", "Details", new { id = item.MaPM })
+                </td>
+                <td>
+                    @using (Html.BeginForm("Delete", "Order", new { id = item.MaPM }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="submit" onclick="return confirm('Bạn có chắc muốn xóa bản ghi này?')" class="btn btn-danger" value="Xóa" />
+                    }                    
+                </td>
+                <td>
+                    @using (Html.BeginForm("Checkout", "Order", new { id = item.MaPM }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="submit" class="btn btn-danger" value="Thanh Toán" />
+                    }
+                </td>
+            </tr>
+        }
+
+        </table>
+
+    </div>
+    <div class="panel-footer">Tổng <span class="badge">@Model.Count()</span></div>
+</div>

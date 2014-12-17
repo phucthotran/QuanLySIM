@@ -1,0 +1,42 @@
+﻿@model QuanLySIM.Entities.SIM
+
+@{
+    ViewBag.Title = "SIM - Cập Nhật";
+    Layout = "~/Areas/Admin/Views/Shared/_Admin.cshtml";
+}
+
+<link href="@Url.Content("~/Content/bs/admin/edit.css")" rel="stylesheet" media="screen"/>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-edit">
+        @Html.HiddenFor(model => model.SimId)
+        @Html.HiddenFor(model => model.MaSIM)
+        @Html.HiddenFor(model => model.SoThueBao)
+
+        @if (ViewBag.FailMsg != null)
+        {
+            <p class="alert alert-danger">@ViewBag.FailMsg</p>
+        }
+
+        <p class="error-text">@Html.ValidationMessageFor(model => model.GiaTien)</p>
+        <p class="error-text">@Html.ValidationMessageFor(model => model.TinhTrang)</p>        
+
+        <p>@Html.LabelFor(model => model.MaSIM) <br /> @Html.DisplayFor(model => model.MaSIM)</p>
+
+        <p>@Html.LabelFor(model => model.SoThueBao) <br /> @Html.DisplayFor(model => model.SoThueBao)</p>
+
+        @Html.LabelFor(model => model.GiaTien)
+        @Html.TextBox("GiaTien", Model.GiaTien, new { @class = "form-control", placeholder = "Giá tiền" })
+
+        @Html.LabelFor(model => model.TinhTrang)
+        @Html.DropDownList("TinhTrang", null, new { @class = "form-control" });
+
+        <p><input type="submit" class="btn btn-lg btn-primary btn-block" value="Cập Nhật" /></p>
+    </div>
+}

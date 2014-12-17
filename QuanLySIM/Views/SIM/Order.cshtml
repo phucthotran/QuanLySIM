@@ -1,0 +1,87 @@
+﻿@model QuanLySIM.Entities.SIM
+
+@{
+    ViewBag.Title = "Quản Lý SIM - Đặt Hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (ViewBag.IsSIMSold != null && ViewBag.IsSIMSold)
+{
+    <p class="alert alert-danger">SIM NÀY ĐÃ BÁN</p>
+}
+else if(ViewBag.IsSIMOrdered != null && ViewBag.IsSIMOrdered)
+{
+    <p class="alert alert-warning">SIM NÀY ĐÃ ĐƯỢC ĐẶT HÀNG</p>
+}
+else if (ViewBag.IsOrderReachLimit != null && ViewBag.IsOrderReachLimit)
+{
+    <p class="alert alert-danger">BẠN KHÔNG THỂ MUA THÊM SIM KHI CHƯA HOÀN THÀNH THANH TOÁN CHO 2 ĐƠN HÀNG TRƯỚC ĐÓ</p>
+}
+else
+{
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title"><span class="glyphicon glyphicon-shopping-cart"></span> ĐƠN ĐẶT HÀNG</h3>
+        </div>  
+        <div class="panel-body">
+
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><span class="glyphicon glyphicon-credit-card"></span> Thông tin SIM</h3>
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item">@Html.LabelFor(model => model.SoThueBao):  @Html.DisplayFor(model => model.SoThueBao)</li>
+                    <li class="list-group-item">@Html.LabelFor(model => model.GiaTien):  @Html.DisplayFor(model => model.GiaTien)</li>
+                </ul>
+            </div>
+
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><span class="glyphicon glyphicon-th-list"></span> Thông tin Khách Hàng</h3>
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item">@Html.Label("KhachHang.TenKH"):  @Html.Display("KhachHang.TenKH")</li>
+                    <li class="list-group-item">@Html.Label("KhachHang.CMND"):  @Html.Display("KhachHang.CMND")</li>
+                    <li class="list-group-item">@Html.Label("KhachHang.SDT"):  @Html.Display("KhachHang.SDT")</li>
+                    <li class="list-group-item">@Html.Label("KhachHang.DiaChi"):  @Html.Display("KhachHang.DiaChi")</li>
+                </ul>
+            </div>
+
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><span class="glyphicon glyphicon-time"></span> Thời gian Giao Dịch</h3>
+                </div>
+                <div class="panel-body">
+                    Thời gian nhận và giao hàng từ 3 ngày tính từ ngày đặt hàng (tức ngày <span class="label label-info">@(DateTime.Now.ToString("dd/MM/yyyy"))</span> tới ngày <span class="label label-info">@(DateTime.Now.AddDays(3).ToString("dd/MM/yyyy"))</span>)
+                </div>
+            </div>
+
+            <div class="panel panel-warning">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><span class="glyphicon glyphicon-bookmark"></span> Quy định Mua Hàng</h3>
+                </div>
+                <div class="panel-body">
+                    Mỗi khách hàng chỉ được phép được thực hiện tối đa <span class="label label-info">2</span> giao dịch khi chưa hoàn thành thanh toán
+                </div>
+            </div>
+
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><span class="glyphicon glyphicon-usd"></span> Tổng tiền phải Thanh Toán</h3>
+                </div>
+                <div class="panel-body">
+                    <p>Phí thanh toán đầy đủ bao gồm <span class="label label-danger">5%</span> thuế VAT</p>
+                    <p class="alert alert-danger"> @( (int)(Model.GiaTien + ((Model.GiaTien * 5) / 100))).000</p>
+                </div>
+            </div>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => model.SimId)
+        
+                <p><input type="submit" class="btn btn-success btn-lg" value="Xác Nhận và Đặt Hàng" /></p>
+            }
+        </div>
+    </div>    
+}

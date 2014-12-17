@@ -1,0 +1,32 @@
+﻿@model QuanLySIM.Entities.NhanVien
+
+@{
+    ViewBag.Title = "Quản Trị - Đăng nhập";
+    Layout = "~/Areas/Admin/Views/Shared/_Admin.cshtml";
+}
+
+
+<link href="@Url.Content("~/Content/bs/admin/signin.css")" rel="stylesheet" media="screen"/>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+                                                                                                         
+    <div class="form-signin">
+        @if (ViewBag.FailMsg != null) 
+        {
+            <p class="alert alert-danger">@ViewBag.FailMsg</p>
+        }
+
+        <p class="error-text">@Html.ValidationMessageFor(model => model.TenTK)</p>
+        <p class="error-text">@Html.ValidationMessageFor(model => model.MatKhau)</p>
+                
+        @Html.TextBox("TenTK", Model.TenTK, new { @class = "form-control", placeholder = "Tên Tài Khoản", autofocus = true })
+        @Html.Password("MatKhau", Model.MatKhau, new { @class = "form-control", placeholder = "Mật Khẩu" })
+
+        <p><input type="submit" class="btn btn-lg btn-primary btn-block" value="Đăng Nhập" /></p>
+    </div>    
+}

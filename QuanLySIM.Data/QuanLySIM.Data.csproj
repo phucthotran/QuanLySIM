@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2DB2B3A4-D192-4409-96EE-1F37C17B6D1D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>QuanLySIM.Data</RootNamespace>
+    <AssemblyName>QuanLySIM.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DbInteractions\DbFactory.cs" />
+    <Compile Include="DbInteractions\Disposable.cs" />
+    <Compile Include="DbInteractions\IDbFactory.cs" />
+    <Compile Include="DbInteractions\IEntityRepository.cs" />
+    <Compile Include="EntityRepositories\BaseRepository.cs" />
+    <Compile Include="EntityRepositories\CustomerRepository.cs" />
+    <Compile Include="EntityRepositories\GroupRepository.cs" />
+    <Compile Include="EntityRepositories\ICustomerRepository.cs" />
+    <Compile Include="EntityRepositories\IGroupRepository.cs" />
+    <Compile Include="EntityRepositories\IOrderRepository.cs" />
+    <Compile Include="EntityRepositories\IRoleRepository.cs" />
+    <Compile Include="EntityRepositories\ISimRepository.cs" />
+    <Compile Include="EntityRepositories\IStaffRepository.cs" />
+    <Compile Include="EntityRepositories\OrderRepository.cs" />
+    <Compile Include="EntityRepositories\RoleRepository.cs" />
+    <Compile Include="EntityRepositories\SimRepository.cs" />
+    <Compile Include="EntityRepositories\StaffRepository.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QuanLySIMContext.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\QuanLySIM.Entities\QuanLySIM.Entities.csproj">
+      <Project>{0E0C664F-04B5-4566-9A29-EBA4F2DD77D0}</Project>
+      <Name>QuanLySIM.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\QuanLySIM.Lib\QuanLySIM.Lib.csproj">
+      <Project>{C9ABFC86-8BFB-48BC-886D-1C88722C41B2}</Project>
+      <Name>QuanLySIM.Lib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
